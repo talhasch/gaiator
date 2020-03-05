@@ -1,6 +1,7 @@
 import fs from 'fs';
 import minimist from 'minimist';
 import blockStack from 'blockstack';
+import packJson from '../package';
 
 import {gaiaAuth} from './auth';
 
@@ -16,6 +17,11 @@ const help = () => {
 
 export default async () => {
   const argv = minimist(process.argv.slice(2));
+
+  if (argv._[0] === 'version') {
+    console.log('gaiator v' + packJson.version);
+    return
+  }
 
   if (!argv.pk || !argv.of || !argv.op) {
     help();
