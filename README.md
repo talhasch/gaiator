@@ -8,7 +8,7 @@ Order based gaia operations.
 
 ### Usage
 
-`gaiator --pk APPPRIVATEKEY --of /path/to/order/file.json `
+`gaiator --pk APPPRIVATEKEY --of /path/to/order/file.json --op /path/top/output.json`
 
 ### Order file template
 
