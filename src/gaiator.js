@@ -8,7 +8,7 @@ const help = () => {
   console.error(`
   Usage:
   
-    gaiator --pk PRIVATEKEY --of /path/to/order/file.json 
+    gaiator --pk APPPRIVATEKEY --of /path/to/order/file.json 
   
   `);
 };
