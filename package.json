@@ -1,0 +1,31 @@
+{
+  "name": "gaiator",
+  "version": "0.0.2",
+  "description": "Order based gaia operations",
+  "author": "Talha Buğra Bulut<talhabugrabulut@gmail.com>",
+  "license": "MIT",
+  "bin": "./cli.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "files": [
+    "cli.js",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talhasch/gaiator"
+  },
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "blockstack": "^19.2.2",
+    "minimist": "^1.2.0",
+    "node-fetch": "^2.6.0"
+  }
+}

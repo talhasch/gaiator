@@ -1,4 +1,5 @@
 node_modules
 dist
-*.json
+order-list.json
+order-list2.json
 .idea
