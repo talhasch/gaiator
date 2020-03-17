@@ -9,7 +9,7 @@ const help = () => {
   console.error(`
   Usage:
   
-  gaiator --pk APPPRIVATEKEY --of /path/to/order/file.json --op /path/top/output.json
+  gaiator --pk APPPRIVATEKEY --if /path/to/input/file.json --of /path/to/output/file.json
   
   `);
 };
@@ -23,17 +23,17 @@ export default async () => {
     return
   }
 
-  if (!argv.pk || !argv.of || !argv.op) {
+  if (!argv.pk || !argv.if || !argv.of) {
     help();
     return;
   }
 
   const appPrivateKey = argv.pk;
-  const orderFile = argv.of;
-  const outPath = argv.op;
+  const inputFile = argv.if;
+  const outputFile = argv.of;
 
   try {
-    fs.writeFileSync(outPath, '[]')
+    fs.writeFileSync(outputFile, '[]');
   } catch (e) {
     console.error('Specify a correct output file path!');
     process.exit(1);
@@ -41,13 +41,13 @@ export default async () => {
 
   let listRaw;
   try {
-    listRaw = fs.readFileSync(orderFile, 'utf8');
+    listRaw = fs.readFileSync(inputFile, 'utf8');
   } catch (e) {
-    console.error('Specify a correct order file path!');
+    console.error('Specify a correct input file path!');
     process.exit(1);
   }
 
-  const orderList = JSON.parse(listRaw);
+  const tasks = JSON.parse(listRaw);
 
   try {
     await gaiaAuth(appPrivateKey);
@@ -58,9 +58,9 @@ export default async () => {
 
   const rv = [];
 
-  for (const order of orderList) {
-    if (order.action === 'put') {
-      const {id, path, name, encrypt, sign} = order;
+  for (const task of tasks) {
+    if (task.action === 'put') {
+      const {id, path, name, encrypt, sign} = task;
       const data = fs.readFileSync(path);
       let resp;
 
@@ -72,8 +72,8 @@ export default async () => {
       }
     }
 
-    if (order.action === 'del') {
-      const {id, name, wasSigned} = order;
+    if (task.action === 'del') {
+      const {id, name, wasSigned} = task;
       let resp;
 
       try {
@@ -85,5 +85,5 @@ export default async () => {
     }
   }
 
-  fs.writeFileSync(outPath, JSON.stringify(rv));
+  fs.writeFileSync(outputFile, JSON.stringify(rv));
 };

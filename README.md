@@ -1,6 +1,6 @@
 # Gaiator
 
-Order based gaia operations.
+Bulk gaia operations.
 
 ## Installation 
 
@@ -8,13 +8,11 @@ Order based gaia operations.
 
 ### Usage
 
-`gaiator --pk APPPRIVATEKEY --of /path/to/order/file.json --op /path/top/output.json`
+`gaiator --pk APPPRIVATEKEY --of /path/to/input/file.json --op /path/to/output/file.json`
 
-### Order file template
+### Input file template
 
 Currently there are 2 types of operations are supported. `putFile` and `deleteFile`.
-
-### Order file template
 
 ```
 [
@@ -43,7 +41,7 @@ Currently there are 2 types of operations are supported. `putFile` and `deleteFi
 ]
 ```
 
-### Output example
+### Output file example
 
 ```
 [

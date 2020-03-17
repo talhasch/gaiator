@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 
-import gaiator from './gaiator';
+import main from './gaiator';
 
 // localStorage support for blockstack.js
 const localStorageRAM = {};
@@ -23,4 +23,4 @@ global['window'] = {
 };
 global['localStorage'] = global['window'].localStorage;
 
-gaiator();
+main().then();
