@@ -8,7 +8,7 @@ Bulk gaia operations.
 
 ### Usage
 
-`gaiator --pk APPPRIVATEKEY --of /path/to/input/file.json --op /path/to/output/file.json`
+`gaiator --pk APPPRIVATEKEY --if /path/to/input/file.json --of /path/to/output/file.json`
 
 ### Input file template
 
