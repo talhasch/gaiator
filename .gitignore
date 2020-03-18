@@ -3,3 +3,4 @@ dist
 input1.json
 input2.json
 .idea
+.DS_Store
