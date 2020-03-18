@@ -17,23 +17,20 @@ Currently there are 2 types of operations are supported. `putFile` and `deleteFi
 ```
 [
    {
-      "id":1,
       "action":"put",
-      "path":"/Users/talhasch/Desktop/images/foo.jpg",
       "name":"foo.jpg",
+      "path":"/Users/talhasch/Desktop/images/foo.jpg",
       "encrypt":false,
       "sign":false
    },
    {
-      "id":2,
       "action":"put",
-      "path":"/Users/talhasch/Desktop/images/bar.txt",
       "name":"bar.txt",
+      "path":"/Users/talhasch/Desktop/images/bar.txt",
       "encrypt":true,
       "sign":false
    },
    {
-      "id":3,
       "action":"del",
       "name":"baz.png",
       "wasSigned":false
@@ -44,19 +41,11 @@ Currently there are 2 types of operations are supported. `putFile` and `deleteFi
 ### Output file example
 
 ```
-[
-   {
-      "id":1,
-      "rv":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/foo.jpg"
-   },
-   {
-      "id":2,
-      "rv":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/bar.txt"
-   },
-   {
-      "id":3,
-      "rv":true
-   }
+{
+   "foo.jpg":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/foo.jpg",
+   "bar.txt":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/bar.txt",
+   "baz.png":true
+}
 ```
 
 **rv represents operation result. if rv is false this means operation wasn't successful.**

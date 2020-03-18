@@ -56,31 +56,30 @@ export default async () => {
     process.exit(1);
   }
 
-  const rv = [];
-
+  const rv = {};
   for (const task of tasks) {
     if (task.action === 'put') {
-      const {id, path, name, encrypt, sign} = task;
+      const {name, path, encrypt, sign} = task;
       const data = fs.readFileSync(path);
       let resp;
 
       try {
         resp = await blockStack.putFile(name, data, {encrypt, sign});
-        rv.push({id, rv: resp});
+        rv[name] = resp;
       } catch (e) {
-        rv.push({id, rv: false});
+        rv[name] = false;
       }
     }
 
     if (task.action === 'del') {
-      const {id, name, wasSigned} = task;
+      const {name, wasSigned} = task;
       let resp;
 
       try {
         resp = await blockStack.deleteFile(name, {wasSigned});
-        rv.push({id, rv: true});
+        rv[name] = true;
       } catch (e) {
-        rv.push({id, rv: false});
+        rv[name] = false;
       }
     }
   }
