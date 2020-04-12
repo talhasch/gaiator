@@ -1,6 +1,6 @@
 # Gaiator
 
-Bulk gaia operations.
+Bulk <a href="https://github.com/blockstack/gaia">gaia</a> operations.
 
 ## Installation 
 
@@ -10,6 +10,35 @@ Bulk gaia operations.
 
 `gaiator --pk APPPRIVATEKEY --if /path/to/input/file.json --of /path/to/output/file.json --cc 2`
 
+#### CLI Arguments
+
+<table>
+<tr>
+<th>Name</th>
+<th>Explanation</th>
+<th>Default value</th>
+</tr>
+<tr>
+<td>--pk</td>
+<td>app private key</td>
+<td>-</td>
+</tr>
+<tr>
+<td>--if</td>
+<td>path of input file</td>
+<td>-</td>
+</tr>
+<tr>
+<td>--if</td>
+<td>path of output file</td>
+<td>-</td>
+</tr>
+<tr>
+<td>--cc</td>
+<td>concurrency</td>
+<td>2</td>
+</tr>
+</table>
 
 
 ### Input file template
@@ -50,4 +79,4 @@ Currently there are 2 types of operations are supported. `putFile` and `deleteFi
 }
 ```
 
-**rv represents operation result. if rv is false this means operation wasn't successful.**
+**rv represents operation result. if rv is false that means operation wasn't successful.**
