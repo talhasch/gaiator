@@ -68,8 +68,8 @@ export default async () => {
       const data = fs.readFileSync(path);
 
       try {
-        await blockStack.putFile(name, data, {encrypt, sign});
-        return [name, true];
+        const url = blockStack.putFile(name, data, {encrypt, sign});
+        return [name, url];
       } catch (e) {
         return [name, false];
       }
