@@ -1,6 +1,7 @@
 import fs from 'fs';
 import minimist from 'minimist';
 import blockStack from 'blockstack';
+import {arrayChunk} from './util';
 import packJson from '../package';
 
 import {gaiaAuth} from './auth';
@@ -9,14 +10,19 @@ const help = () => {
   console.error(`
   Usage:
   
-  gaiator --pk APPPRIVATEKEY --if /path/to/input/file.json --of /path/to/output/file.json
+  gaiator --pk APPPRIVATEKEY --if /path/to/input/file.json --of /path/to/output/file.json --cc 2 
   
   `);
 };
 
 
 export default async () => {
-  const argv = minimist(process.argv.slice(2));
+
+  const argvOpts = {
+    default: {cc: 2}
+  };
+
+  const argv = minimist(process.argv.slice(2), argvOpts);
 
   if (argv._[0] === 'version') {
     console.log('gaiator v' + packJson.version);
@@ -56,31 +62,39 @@ export default async () => {
     process.exit(1);
   }
 
-  const rv = {};
-  for (const task of tasks) {
+  const doTask = async (task) => {
     if (task.action === 'put') {
       const {name, path, encrypt, sign} = task;
       const data = fs.readFileSync(path);
-      let resp;
 
       try {
-        resp = await blockStack.putFile(name, data, {encrypt, sign});
-        rv[name] = resp;
+        await blockStack.putFile(name, data, {encrypt, sign});
+        return [name, true];
       } catch (e) {
-        rv[name] = false;
+        return [name, false];
       }
     }
 
     if (task.action === 'del') {
       const {name, wasSigned} = task;
-      let resp;
 
       try {
-        resp = await blockStack.deleteFile(name, {wasSigned});
-        rv[name] = true;
+        await blockStack.deleteFile(name, {wasSigned});
+        return [name, true];
       } catch (e) {
-        rv[name] = false;
+        return [name, false];
       }
+    }
+  };
+
+  const rv = {};
+  const chunks = arrayChunk(tasks, argv.cc);
+  for (let chunk of chunks) {
+    const ps = chunk.map(x => doTask(x));
+    const cRes = await Promise.all(ps);
+    for (let cR of cRes) {
+      const [name, res] = cR;
+      rv[name] = res;
     }
   }
 
