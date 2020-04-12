@@ -1,7 +1,7 @@
 {
   "name": "gaiator",
-  "version": "0.0.8",
-  "description": "Order based gaia operations",
+  "version": "0.0.9",
+  "description": "Bulk gaia operations",
   "author": "Talha Buğra Bulut<talhabugrabulut@gmail.com>",
   "license": "MIT",
   "bin": "./cli.js",
