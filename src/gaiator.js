@@ -64,11 +64,11 @@ export default async () => {
 
   const doTask = async (task) => {
     if (task.action === 'put') {
-      const {name, path, encrypt, sign} = task;
+      const {name, path, encrypt, sign, contentType} = task;
       const data = fs.readFileSync(path);
 
       try {
-        const url = await blockStack.putFile(name, data, {encrypt, sign});
+        const url = await blockStack.putFile(name, data, {encrypt, sign, contentType});
         return [name, url];
       } catch (e) {
         return [name, false];

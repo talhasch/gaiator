@@ -52,14 +52,16 @@ Currently there are 2 types of operations are supported. `putFile` and `deleteFi
       "name":"foo.jpg",
       "path":"/Users/talhasch/Desktop/images/foo.jpg",
       "encrypt":false,
-      "sign":false
+      "sign":false,
+      "contentType": "image/jpeg"
    },
    {
       "action":"put",
       "name":"bar.txt",
       "path":"/Users/talhasch/Desktop/images/bar.txt",
       "encrypt":true,
-      "sign":false
+      "sign":false,
+      "contentType": "text/plain"
    },
    {
       "action":"del",
