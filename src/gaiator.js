@@ -10,7 +10,7 @@ const help = () => {
   console.error(`
   Usage:
   
-  gaiator --pk APPPRIVATEKEY --if /path/to/input/file.json --of /path/to/output/file.json --cc 2 
+  gaiator --if /path/to/input/file.json --of /path/to/output/file.json --cc 2 
   
   `);
 };
@@ -29,12 +29,11 @@ export default async () => {
     return
   }
 
-  if (!argv.pk || !argv.if || !argv.of) {
+  if (!argv.if || !argv.of) {
     help();
     return;
   }
 
-  const appPrivateKey = argv.pk;
   const inputFile = argv.if;
   const outputFile = argv.of;
 
@@ -45,18 +44,19 @@ export default async () => {
     process.exit(1);
   }
 
-  let listRaw;
+  let input;
   try {
-    listRaw = fs.readFileSync(inputFile, 'utf8');
+    input = fs.readFileSync(inputFile, 'utf8');
   } catch (e) {
     console.error('Specify a correct input file path!');
     process.exit(1);
   }
 
-  const tasks = JSON.parse(listRaw);
+  const inputObj = JSON.parse(input);
+  const {privateKey, tasks} = inputObj;
 
   try {
-    await gaiaAuth(appPrivateKey);
+    await gaiaAuth(privateKey);
   } catch (e) {
     console.error('Could not login! Make sure the private key is correct!');
     process.exit(1);
