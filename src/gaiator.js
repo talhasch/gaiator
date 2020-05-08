@@ -53,16 +53,7 @@ export default async () => {
   }
 
   const inputObj = JSON.parse(input);
-  const {privateKey} = inputObj;
-
-  if (argv._[0] === 'priv2pub') {
-    // A helper to get public key from private
-    const pub = getPublicKeyFromPrivate(privateKey);
-    fs.writeFileSync(outputFile, JSON.stringify(pub));
-    return;
-  }
-
-  const {tasks} = inputObj;
+  const {privateKey, tasks} = inputObj;
 
   try {
     await gaiaAuth(privateKey);
@@ -96,16 +87,21 @@ export default async () => {
     }
   };
 
-  const rv = {};
+  const result = {};
   const chunks = arrayChunk(tasks, argv.cc);
   for (let chunk of chunks) {
     const ps = chunk.map(x => doTask(x));
     const cRes = await Promise.all(ps);
     for (let cR of cRes) {
       const [name, res] = cR;
-      rv[name] = res;
+      result[name] = res;
     }
   }
 
-  fs.writeFileSync(outputFile, JSON.stringify(rv));
+  const out = {
+    pubKey:  getPublicKeyFromPrivate(privateKey),
+    result
+  };
+
+  fs.writeFileSync(outputFile, JSON.stringify(out));
 };
