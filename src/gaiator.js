@@ -1,6 +1,6 @@
 import fs from 'fs';
 import minimist from 'minimist';
-import blockStack from 'blockstack';
+import blockStack, {getPublicKeyFromPrivate} from 'blockstack';
 import {arrayChunk} from './util';
 import packJson from '../package';
 
@@ -53,7 +53,16 @@ export default async () => {
   }
 
   const inputObj = JSON.parse(input);
-  const {privateKey, tasks} = inputObj;
+  const {privateKey} = inputObj;
+
+  if (argv._[0] === 'priv2pub') {
+    // A helper to get public key from private
+    const pub = getPublicKeyFromPrivate(privateKey);
+    fs.writeFileSync(outputFile, JSON.stringify(pub));
+    return;
+  }
+
+  const {tasks} = inputObj;
 
   try {
     await gaiaAuth(privateKey);
