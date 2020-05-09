@@ -2,5 +2,6 @@ node_modules
 dist
 input1.json
 input2.json
+input3.json
 .idea
 .DS_Store
