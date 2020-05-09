@@ -68,10 +68,14 @@ Currently there are 2 types of operations are supported. `putFile` and `deleteFi
 
 ```
 {
-   "foo.jpg":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/foo.jpg",
-   "bar.txt":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/bar.txt",
-   "baz.png":true
+   "publicKey": "public-key-from-private-key-given",
+   "identityAddress": "identity-address-from-public-key",
+    result: {
+        "foo.jpg":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/foo.jpg",
+        "bar.txt":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/bar.txt",
+        "baz.png":true
+    }
 }
 ```
 
-**rv represents operation result. if rv is false that means operation wasn't successful.**
+**if value of a result item is "false", that means operation wasn't successful.**
