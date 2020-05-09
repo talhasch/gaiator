@@ -99,11 +99,11 @@ export default async () => {
   }
 
   const publicKey = getPublicKeyFromPrivate(privateKey);
-  const identityAddress = publicKeyToAddress(publicKey);
+  const address = publicKeyToAddress(publicKey);
 
   const out = {
     publicKey,
-    identityAddress,
+    address,
     result
   };
 

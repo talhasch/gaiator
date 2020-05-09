@@ -69,7 +69,7 @@ Currently there are 2 types of operations are supported. `putFile` and `deleteFi
 ```
 {
    "publicKey": "public-key-from-private-key-given",
-   "identityAddress": "identity-address-from-public-key",
+   "address": "address-from-public-key",
     result: {
         "foo.jpg":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/foo.jpg",
         "bar.txt":"https://gaia.blockstack.org/hub/1KsEq6grFXXXX7LzoMU9tzSrFUTxaN6di9/bar.txt",
