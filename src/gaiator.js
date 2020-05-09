@@ -1,6 +1,6 @@
 import fs from 'fs';
 import minimist from 'minimist';
-import blockStack, {getPublicKeyFromPrivate} from 'blockstack';
+import blockStack, {getPublicKeyFromPrivate, publicKeyToAddress} from 'blockstack';
 import {arrayChunk} from './util';
 import packJson from '../package';
 
@@ -98,8 +98,12 @@ export default async () => {
     }
   }
 
+  const publicKey = getPublicKeyFromPrivate(privateKey);
+  const identityAddress = publicKeyToAddress(publicKey);
+
   const out = {
-    pubKey:  getPublicKeyFromPrivate(privateKey),
+    publicKey,
+    identityAddress,
     result
   };
 
